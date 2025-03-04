@@ -1,0 +1,17 @@
+def book_course(request, course_id):
+    course = get_object_or_404(Course, id=course_id)
+    student = Student.objects.get(user=request.user)
+    try:
+        # Create a Stripe payment intent
+        intent = stripe.PaymentIntent.create(
+            amount=int(course.price * 100),  # Amount in cents
+            currency='usd',
+            metadata={'course_id': course.id, 'student_id': student.id},
+        )
+        Booking.objects.create(student=student, course=course)
+        return render(request, 'courses/payment.html', {
+            'client_secret': intent.client_secret,
+            'course': course,
+        })
+    except Exception as e:
+        return render(request, 'courses/payment_error.html', {'error': str(e)})

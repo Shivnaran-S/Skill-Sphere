@@ -1,0 +1,12 @@
+<!-- course_detail.html -->
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ course.title }}</h2>
+<p>{{ course.description }}</p>
+<h3>Course Content</h3>
+<ul>
+    <li><a href="#">Video 1</a></li>
+    <li><a href="#">PDF 1</a></li>
+    <li><a href="#">Quiz 1</a></li>
+</ul>
+{% endblock %}

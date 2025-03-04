@@ -1,19 +1,30 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Suggested Courses</h2>
+<h2>Welcome, {{ request.user.username }}</h2>
+
+<form method="get" action="{% url 'dashboard' %}" class="search-form">
+    <input type="text" name="q" placeholder="Search courses..." value="{{ request.GET.q }}">
+    <button type="submit">Search</button>
+</form>
+
+<h3>Suggested Courses</h3>
 <ul>
     {% for course in courses %}
     <li>
-        <h3>{{ course.title }}</h3>
+        <h4>{{ course.title }}</h4>
         <p>{{ course.description }}</p>
         <a href="{% url 'book_course' course.id %}">Book Course</a>
     </li>
     {% endfor %}
 </ul>
-<h2>Booked Courses</h2>
+<h3>Enrolled Courses</h3>
 <ul>
     {% for booking in booked_courses %}
-    <li>{{ booking.course.title }}</li>
+    <li>
+        <h4>{{ booking.course.title }}</h4>
+        <p>Booked on: {{ booking.booked_on }}</p>
+        <a href="{% url 'course_detail' booking.course.id %}">View Course</a>
+    </li>
     {% endfor %}
 </ul>
 {% endblock %}

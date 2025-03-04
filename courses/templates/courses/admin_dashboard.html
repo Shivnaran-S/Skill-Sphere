@@ -1,0 +1,21 @@
+<!-- admin_dashboard.html -->
+{% extends 'base.html' %}
+{% block content %}
+<h2>Admin Dashboard</h2>
+<h3>Courses</h3>
+<a href="{% url 'add_course' %}">Add Course</a>
+<ul>
+    {% for course in courses %}
+    <li>
+        {{ course.title }} - {{ course.domain }}
+        <a href="{% url 'delete_course' course.id %}">Delete</a>
+    </li>
+    {% endfor %}
+</ul>
+<h3>Students</h3>
+<ul>
+    {% for student in students %}
+    <li>{{ student.user.username }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
