@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="hero">
+    <h2>Welcome to the Learning Platform</h2>
+    <p>Discover your interests and enroll in courses to grow your skills.</p>
+    <a href="{% url 'login' %}">Login</a>
+    <a href="{% url 'signup' %}">Signup</a>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Suggested Courses</h2>
+<ul>
+    {% for course in courses %}
+    <li>
+        <h3>{{ course.title }}</h3>
+        <p>{{ course.description }}</p>
+        <a href="{% url 'book_course' course.id %}">Book Course</a>
+    </li>
+    {% endfor %}
+</ul>
+<h2>Booked Courses</h2>
+<ul>
+    {% for booking in booked_courses %}
+    <li>{{ booking.course.title }}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
